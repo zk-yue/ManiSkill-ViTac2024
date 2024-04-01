@@ -145,7 +145,7 @@ class ContinuousInsertionSimEnv(gym.Env):
             self.scene.set_ambient_light([0.5, 0.5, 0.5])
             self.scene.add_directional_light([0, -1, -1], [0.5, 0.5, 0.5], True)
         else:
-            self.scene = sapien.Scene(systems=[])
+            self.scene = sapien.Scene()
 
         # add a camera to indicate shader
         if not no_render:
@@ -237,9 +237,10 @@ class ContinuousInsertionSimEnv(gym.Env):
         asset_dir = Path(repo_path) / "assets"
         peg_path = asset_dir / peg_path
         hole_path = asset_dir / hole_path
-
+        print("this is:", peg_path)
         # add peg
         with suppress_stdout_stderr():
+
             self.peg_entity, peg_abd = build_sapien_entity_ABD(peg_path, "cuda:0", density=500.0,
                                                                color=[1.0, 0.0, 0.0, 0.9],
                                                                friction=self.params.peg_friction,
@@ -802,8 +803,8 @@ class ContinuousInsertionSimGymRandomizedPointFLowEnv(ContinuousInsertionSimEnv)
         if render_rgb:
             self.default_observation["rgb_images"] = np.stack(
                 [
-                    np.zeros((320, 240, 3), dtype=np.uint8),
-                    np.zeros((320, 240, 3), dtype=np.uint8),
+                    np.zeros((240, 320, 3), dtype=np.uint8),
+                    np.zeros((240, 320, 3), dtype=np.uint8),
                 ],
                 axis=0
             )
