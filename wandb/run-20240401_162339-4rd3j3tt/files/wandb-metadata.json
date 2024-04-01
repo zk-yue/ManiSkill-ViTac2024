@@ -1,0 +1,208 @@
+{
+    "os": "Linux-5.15.0-101-generic-x86_64-with-glibc2.31",
+    "python": "3.10.0",
+    "heartbeatAt": "2024-04-01T08:23:42.162805",
+    "startedAt": "2024-04-01T08:23:39.974089",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/yuezk/yzk/ViTac/5_sac_revised/ManiSkill-ViTac2024/scripts/train_td3.py",
+    "codePathLocal": "scripts/train_td3.py",
+    "codePath": "scripts/train_td3.py",
+    "git": {
+        "remote": "https://github.com/zk-yue/ManiSkill-ViTac2024.git",
+        "commit": "eafe36d536475f213af25d2fd36e89b08382d156"
+    },
+    "email": "yuezhaokun@live.com",
+    "root": "/home/yuezk/yzk/ViTac/5_sac_revised/ManiSkill-ViTac2024",
+    "host": "yuezk-OMEN",
+    "username": "yuezk",
+    "executable": "/home/yuezk/anaconda3/envs/mani_vitac/bin/python",
+    "cpu_count": 24,
+    "cpu_count_logical": 32,
+    "cpu_freq": {
+        "current": 2389.3833750000003,
+        "min": 800.0,
+        "max": 4575.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 5400.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 5400.0
+        },
+        {
+            "current": 1700.591,
+            "min": 800.0,
+            "max": 5400.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 5400.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 5200.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 3900.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 3900.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 3900.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 3900.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 3900.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 3900.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 3900.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 3900.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 3900.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 3900.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 3900.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 3900.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 3900.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 3900.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 3900.0
+        },
+        {
+            "current": 2400.0,
+            "min": 800.0,
+            "max": 3900.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 233.61745834350586,
+            "used": 20.743358612060547
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "memory_total": 8585740288
+        }
+    ],
+    "memory": {
+        "total": 15.310752868652344
+    }
+}
