@@ -10,6 +10,8 @@ from torch import nn
 
 from solutions.networks import PointNetFeatureExtractor
 
+from solutions.policies_sac import LSTM
+
 class PointNetActor(Actor):
     def __init__(
         self,
@@ -59,6 +61,15 @@ class PointNetActor(Actor):
                 last_linear.weight.data.copy_(0.01 * last_linear.weight.data)
 
         # self.mu = nn.Sequential(*actor_net)
+        
+        # ----------lstm----------
+        self.lstm=LSTM(
+            input_size = pointnet_out_dim*2, 
+            hidden_size = 256, 
+            num_layers = 2, 
+            output_size = pointnet_out_dim*2
+            )
+        # ----------lstm----------
 
     def forward(self, obs: torch.Tensor) -> torch.Tensor:
         with torch.set_grad_enabled(False):
@@ -80,6 +91,13 @@ class PointNetActor(Actor):
         r_point_flow_fea = point_flow_fea[batch_num:, ...]
 
         point_flow_fea = torch.cat([l_point_flow_fea, r_point_flow_fea], dim=-1)
+
+        # ---------LSTM---------
+        if point_flow_fea.ndim == 2:
+            point_flow_fea = torch.unsqueeze(point_flow_fea, 0)
+
+        point_flow_fea = self.lstm(point_flow_fea)
+        # ---------LSTM---------
 
         pred = self.mlp_policy(point_flow_fea)
 

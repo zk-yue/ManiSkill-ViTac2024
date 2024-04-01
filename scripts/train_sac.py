@@ -11,10 +11,12 @@ import ruamel.yaml as yaml
 import torch
 from path import Path
 
-from solutions.policies import (
-    TD3PolicyForPointFlowEnv, TD3PolicyForLongOpenLockPointFlowEnv
-)
-from stable_baselines3 import TD3
+# from solutions.policies import (
+#     TD3PolicyForPointFlowEnv, TD3PolicyForLongOpenLockPointFlowEnv
+# )
+from solutions.policies_sac import SACPolicyForPointFlowEnv
+# from stable_baselines3 import TD3
+from stable_baselines3 import SAC
 from stable_baselines3.common.callbacks import (CallbackList,
                                                 CheckpointCallback,
                                                 EvalCallback)
@@ -27,12 +29,11 @@ import wandb
 from arguments import *
 
 algorithm_aliases = {
-    "TD3": TD3,
+    "SAC": SAC,
 }
-TD3.policy_aliases["TD3PolicyForPointFlowEnv"] = TD3PolicyForPointFlowEnv
-TD3.policy_aliases["TD3PolicyForLongOpenLockPointFlowEnv"] = TD3PolicyForLongOpenLockPointFlowEnv
 
-
+SAC.policy_aliases["SACPolicyForPointFlowEnv"] = SACPolicyForPointFlowEnv
+# SAC.policy_aliases["TD3PolicyForLongOpenLockPointFlowEnv"] = TD3PolicyForLongOpenLockPointFlowEnv
 
 def make_env(env_name, seed=0, i=0, **env_args):
     num_devices = torch.cuda.device_count()
@@ -51,6 +52,7 @@ def make_env(env_name, seed=0, i=0, **env_args):
 if __name__ == "__main__":
     parser = get_parser()
     args = parser.parse_args()
+    args.cfg='configs/parameters/peg_insertion_sac.yaml'
     with open(args.cfg, "r") as f:
         cfg = yaml.YAML(typ='safe', pure=True).load(f)
 
@@ -146,7 +148,7 @@ if __name__ == "__main__":
         n_eval_episodes=cfg["train"]["n_eval"],
     )
 
-    WANDB = False
+    WANDB = True
     if WANDB:
         wandb_run = wandb.init(
             project=cfg["train"]["wandb_name"],

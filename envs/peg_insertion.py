@@ -46,6 +46,46 @@ def evaluate_error(offset):
     error = math.sqrt(offset_squared[0] + offset_squared[1] + offset_squared[2])
     return error
 
+def evaluate_error_custom(o):
+    lr_marker_flow = o["marker_flow"]
+    l_marker_flow, r_marker_flow = lr_marker_flow[0], lr_marker_flow[1]
+    l_diff = np.mean(
+        np.sqrt(
+            np.sum(
+                (l_marker_flow[0] - l_marker_flow[1]) ** 2, axis=-1 # (52,3)
+            )
+        )
+    )
+
+    r_diff = np.mean(
+        np.sqrt(
+            np.sum(
+                (r_marker_flow[0] - r_marker_flow[1]) ** 2, axis=-1 # (52,3)
+            )
+        )
+    )
+    error = math.sqrt(l_diff**2 + r_diff**2)/5
+    return error
+
+def visualize_marker_point_flow(o):
+        lr_marker_flow = o["marker_flow"] # (2,2,128,2)
+        l_marker_flow, r_marker_flow = lr_marker_flow[0], lr_marker_flow[1] # (2,128,2)
+        plt.figure(1, (20, 9))
+        ax = plt.subplot(1, 2, 1)
+        ax.scatter(l_marker_flow[0, :, 0], l_marker_flow[0, :, 1], c="blue")
+        ax.scatter(l_marker_flow[1, :, 0], l_marker_flow[1, :, 1], c="red")
+        plt.xlim(0, 350)
+        plt.ylim(0, 300)
+        ax.invert_yaxis()
+        ax = plt.subplot(1, 2, 2)
+        ax.scatter(r_marker_flow[0, :, 0], r_marker_flow[0, :, 1], c="blue")
+        ax.scatter(r_marker_flow[1, :, 0], r_marker_flow[1, :, 1], c="red")
+        plt.xlim(0, 350)
+        plt.ylim(0, 300)
+        ax.invert_yaxis()
+        plt.show(block=False)
+        plt.pause(1)	
+        plt.close()
 
 class ContinuousInsertionParams(CommonParams):
     def __init__(self,
@@ -487,7 +527,12 @@ class ContinuousInsertionSimEnv(gym.Env):
         self.current_episode_initial_right_surface_pts = self.no_contact_surface_mesh[1]
         self.current_episode_over = False
 
-        return self.get_obs(), {}
+        # return self.get_obs(), {}
+        
+        obs=self.get_obs()
+        self.error_evaluation_list_2 = []
+        self.error_evaluation_list_2.append(evaluate_error_custom(obs))
+        return obs, {}
 
     def _sim_step(self, action):
         action = np.clip(action, -self.max_action, self.max_action)
@@ -627,7 +672,9 @@ class ContinuousInsertionSimEnv(gym.Env):
 
         info = self.get_info()
         obs = self.get_obs(info=info)
-        reward = self.get_reward(info=info, obs=obs)
+        # visualize_marker_point_flow(obs)
+        # reward = self.get_reward(info=info, obs=obs)
+        reward = self.get_reward_custom(info=info, obs=obs)
         terminated = self.get_terminated(info=info, obs=obs)
         truncated = self.get_truncated(info=info, obs=obs)
         return obs, reward, terminated, truncated, info
@@ -654,7 +701,7 @@ class ContinuousInsertionSimEnv(gym.Env):
             l_diff = np.mean(
                 np.sqrt(
                     np.sum(
-                        (self.current_episode_initial_left_surface_pts - observation_left_surface_pts) ** 2, axis=-1
+                        (self.current_episode_initial_left_surface_pts - observation_left_surface_pts) ** 2, axis=-1 # (52,3)
                     )
                 )
             )
@@ -704,6 +751,20 @@ class ContinuousInsertionSimEnv(gym.Env):
     def get_reward(self, info, obs=None):
         self.error_evaluation_list.append(evaluate_error(self.current_offset_of_current_episode))
         reward = self.error_evaluation_list[-2] - self.error_evaluation_list[-1] - self.step_penalty
+
+        if info["too_many_steps"]:
+            reward = 0
+        elif info["error_too_large"]:
+            reward += -2 * self.step_penalty * (self.max_steps - self.current_episode_elapsed_steps) + self.step_penalty
+        elif info["is_success"]:
+            reward += self.final_reward
+
+        return reward
+
+    def get_reward_custom(self, info, obs=None):
+        self.error_evaluation_list.append(evaluate_error(self.current_offset_of_current_episode))
+        self.error_evaluation_list_2.append(evaluate_error_custom(obs))
+        reward = self.error_evaluation_list_2[-2] - self.error_evaluation_list_2[-1] - self.error_evaluation_list[-2] - self.error_evaluation_list[-1] - self.step_penalty
 
         if info["too_many_steps"]:
             reward = 0
@@ -950,6 +1011,8 @@ if __name__ == "__main__":
         # Save the figure with a filename based on the loop parameter i
         filename = os.path.join(save_dir, f"sp-from-sapienipc-{name}-marker_flow_{i}.png")
         plt.savefig(filename)
+        plt.show(block=False)
+        plt.pause(1)	
         plt.close()
 
 
