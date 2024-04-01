@@ -1,0 +1,1 @@
+{"global_step": 202, "_timestamp": 1710166225.4999266, "rollout/success_rate": 0.0, "time/fps": 1.0, "train/actor_loss": -188.96533203125, "train/critic_loss": 2041493.25, "train/ent_coef": 0.9580345153808594, "train/ent_coef_loss": -0.05042712762951851, "train/learning_rate": 0.0003000000142492354, "_runtime": 108.72911167144775, "_step": 1, "_wandb": {"runtime": 169}}

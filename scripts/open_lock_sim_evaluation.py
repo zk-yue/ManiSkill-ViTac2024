@@ -2,6 +2,11 @@ import copy
 import os
 import sys
 import time
+from path import Path
+script_path = os.path.dirname(os.path.realpath(__file__))
+repo_path = os.path.join(script_path, "..")
+sys.path.append(script_path)
+sys.path.insert(0, repo_path)
 import numpy as np
 import ruamel.yaml as yaml
 import torch
@@ -9,22 +14,15 @@ from stable_baselines3.common.save_util import load_from_zip_file
 
 from scripts.arguments import parse_params
 from envs.long_open_lock import LongOpenLockRandPointFlowEnv
-from path import Path
+
 from stable_baselines3.common.utils import set_random_seed
 
 from solutions.policies import TD3PolicyForLongOpenLockPointFlowEnv
 from utils.common import get_time, get_average_params
 from loguru import logger
 
-script_path = os.path.dirname(os.path.realpath(__file__))
-repo_path = os.path.join(script_path, "..")
-sys.path.append(script_path)
-sys.path.insert(0, repo_path)
 
-script_path = os.path.dirname(os.path.realpath(__file__))
-repo_path = os.path.join(script_path, "..")
-sys.path.append(script_path)
-sys.path.insert(0, repo_path)
+
 
 EVAL_CFG_FILE = os.path.join(repo_path, "configs/evaluation/open_lock_evaluation.yaml")
 KEY_NUM = 4
@@ -121,7 +119,7 @@ if __name__ == "__main__":
     key = args.key
     # replace the model with your own policy
 
-    policy_file = "../pretrain_weight/pretrain_openlock/best_model.zip"
+    policy_file = "./pretrain_weight/pretrain_openlock/best_model"
     data, params, _ = load_from_zip_file(policy_file)
     model = TD3PolicyForLongOpenLockPointFlowEnv(observation_space=data["observation_space"],
                                     action_space=data["action_space"],

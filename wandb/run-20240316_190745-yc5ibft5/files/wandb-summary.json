@@ -1,0 +1,1 @@
+{"global_step": 1084, "_timestamp": 1710587467.000503, "rollout/success_rate": 0.009999999776482582, "time/fps": 5.0, "_runtime": 201.374902009964, "_step": 13, "_wandb": {"runtime": 211}}

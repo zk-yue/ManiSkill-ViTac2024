@@ -1,0 +1,219 @@
+
+Logging to /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/scripts/../training_log/3shape_1.5mm_batch_size_512_lr_0.0001_2024-03-20_16-49-14.316/SAC_1
+/home/yuezk/anaconda3/envs/mani_vitac/lib/python3.10/site-packages/stable_baselines3/common/callbacks.py:403: UserWarning: Training and eval env are not of the same type<stable_baselines3.common.vec_env.subproc_vec_env.SubprocVecEnv object at 0x7f72ef504b50> != <stable_baselines3.common.vec_env.dummy_vec_env.DummyVecEnv object at 0x7f71cc91fa00>
+  warnings.warn("Training and eval env are not of the same type" f"{self.training_env} != {self.eval_env}")
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 6        |
+|    fps             | 0        |
+|    time_elapsed    | 1109     |
+|    total_timesteps | 64       |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 12       |
+|    fps             | 0        |
+|    time_elapsed    | 5895     |
+|    total_timesteps | 96       |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 18       |
+|    fps             | 0        |
+|    time_elapsed    | 5910     |
+|    total_timesteps | 144      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 24       |
+|    fps             | 0        |
+|    time_elapsed    | 5928     |
+|    total_timesteps | 192      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 30       |
+|    fps             | 0        |
+|    time_elapsed    | 5938     |
+|    total_timesteps | 224      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 36       |
+|    fps             | 0        |
+|    time_elapsed    | 5960     |
+|    total_timesteps | 288      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 42       |
+|    fps             | 0        |
+|    time_elapsed    | 5969     |
+|    total_timesteps | 320      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 48       |
+|    fps             | 0        |
+|    time_elapsed    | 5985     |
+|    total_timesteps | 380      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 54       |
+|    fps             | 0        |
+|    time_elapsed    | 5998     |
+|    total_timesteps | 416      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 60       |
+|    fps             | 0        |
+|    time_elapsed    | 6013     |
+|    total_timesteps | 472      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 66       |
+|    fps             | 0        |
+|    time_elapsed    | 6027     |
+|    total_timesteps | 508      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 72       |
+|    fps             | 0        |
+|    time_elapsed    | 6042     |
+|    total_timesteps | 548      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 78       |
+|    fps             | 0        |
+|    time_elapsed    | 6057     |
+|    total_timesteps | 600      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 84       |
+|    fps             | 0        |
+|    time_elapsed    | 6073     |
+|    total_timesteps | 644      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 90       |
+|    fps             | 0        |
+|    time_elapsed    | 6086     |
+|    total_timesteps | 688      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 96       |
+|    fps             | 0        |
+|    time_elapsed    | 6103     |
+|    total_timesteps | 740      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 102      |
+|    fps             | 0        |
+|    time_elapsed    | 6116     |
+|    total_timesteps | 780      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0.01     |
+| time/              |          |
+|    episodes        | 108      |
+|    fps             | 0        |
+|    time_elapsed    | 6128     |
+|    total_timesteps | 820      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0.01     |
+| time/              |          |
+|    episodes        | 114      |
+|    fps             | 0        |
+|    time_elapsed    | 6142     |
+|    total_timesteps | 856      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0.01     |
+| time/              |          |
+|    episodes        | 120      |
+|    fps             | 0        |
+|    time_elapsed    | 6158     |
+|    total_timesteps | 908      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0.01     |
+| time/              |          |
+|    episodes        | 126      |
+|    fps             | 0        |
+|    time_elapsed    | 6173     |
+|    total_timesteps | 948      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0.01     |
+| time/              |          |
+|    episodes        | 132      |
+|    fps             | 0        |
+|    time_elapsed    | 6184     |
+|    total_timesteps | 980      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0.01     |
+| time/              |          |
+|    episodes        | 138      |
+|    fps             | 0        |
+|    time_elapsed    | 6200     |
+|    total_timesteps | 1036     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0.01     |
+| time/              |          |
+|    episodes        | 144      |
+|    fps             | 0        |
+|    time_elapsed    | 6213     |
+|    total_timesteps | 1076     |

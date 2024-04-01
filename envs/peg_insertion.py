@@ -46,6 +46,12 @@ def evaluate_error(offset):
     error = math.sqrt(offset_squared[0] + offset_squared[1] + offset_squared[2])
     return error
 
+# def evaluate_error_custom(offset):
+#     offset_abs = np.abs(offset)
+#     offset_filtered = np.where(offset_abs < 0.1, 0.1, offset_abs)
+#     offset_reciprocal = np.reciprocal(offset_filtered)
+#     error = np.sum(offset_reciprocal)/3
+#     return error
 
 class ContinuousInsertionParams(CommonParams):
     def __init__(self,
@@ -482,6 +488,8 @@ class ContinuousInsertionSimEnv(gym.Env):
         self.current_offset_of_current_episode = offset
         self.error_evaluation_list = []
         self.error_evaluation_list.append(evaluate_error(self.current_offset_of_current_episode))
+        # self.error_evaluation_list_2 = []
+        # self.error_evaluation_list_2.append(evaluate_error_custom(self.current_offset_of_current_episode))
         self.current_episode_initial_left_surface_pts = self.no_contact_surface_mesh[0]
         self.current_episode_initial_right_surface_pts = self.no_contact_surface_mesh[1]
         self.current_episode_over = False
@@ -626,7 +634,8 @@ class ContinuousInsertionSimEnv(gym.Env):
 
         info = self.get_info()
         obs = self.get_obs(info=info)
-        reward = self.get_reward(info=info, obs=obs)
+        # reward = self.get_reward(info=info, obs=obs)
+        reward = self.get_reward_custom(info=info, obs=obs)
         terminated = self.get_terminated(info=info, obs=obs)
         truncated = self.get_truncated(info=info, obs=obs)
         return obs, reward, terminated, truncated, info
@@ -704,6 +713,21 @@ class ContinuousInsertionSimEnv(gym.Env):
         self.error_evaluation_list.append(evaluate_error(self.current_offset_of_current_episode))
         reward = self.error_evaluation_list[-2] - self.error_evaluation_list[-1] - self.step_penalty
 
+        if info["too_many_steps"]:
+            reward = 0
+        elif info["error_too_large"]:
+            reward += -2 * self.step_penalty * (self.max_steps - self.current_episode_elapsed_steps) + self.step_penalty
+        elif info["is_success"]:
+            reward += self.final_reward
+
+        return reward
+    
+    def get_reward_custom(self, info, obs=None):
+        self.error_evaluation_list.append(evaluate_error(self.current_offset_of_current_episode))
+        reward = self.error_evaluation_list[-2] - self.error_evaluation_list[-1] - self.step_penalty
+        # self.error_evaluation_list_2.append(evaluate_error_custom(self.current_offset_of_current_episode))
+        # reward = self.error_evaluation_list[-2] - self.error_evaluation_list[-1] + self.error_evaluation_list_2[-1] - self.error_evaluation_list_2[-2] - self.step_penalty
+            
         if info["too_many_steps"]:
             reward = 0
         elif info["error_too_large"]:
@@ -950,7 +974,6 @@ if __name__ == "__main__":
         filename = os.path.join(save_dir, f"sp-from-sapienipc-{name}-marker_flow_{i}.png")
         plt.savefig(filename)
         plt.close()
-
 
     offset_list = [[4, 0, 0], [-4, 0, 0], [0, 4, 0], [0, -4, 0]]
     for offset in offset_list:

@@ -1,0 +1,109 @@
+wandb_version: 1
+
+env:
+  desc: null
+  value:
+    max_action:
+    - 4.0
+    - 2.0
+    - 2.0
+    step_penalty: 1
+    final_reward: 10
+    max_steps: 100
+    sensor_offset_x_range_len: 2.0
+    sensor_offset_z_range_len: 2.0
+    key_x_max_offset: 10
+    key_y_max_offset: 0
+    key_z_max_offset: 0
+    normalize: false
+    marker_random_noise: 0.5
+    marker_lose_tracking_probability: 0.01
+    marker_interval_range:
+    - 1.95
+    - 2.15
+    marker_rotation_range: 0.1
+    marker_translation_range:
+    - 1
+    - 1
+    marker_pos_shift_range:
+    - 0.1
+    - 0.1
+policy:
+  desc: null
+  value:
+    buffer_size: 200000
+    train_freq: 2
+    gradient_steps: -1
+    learning_starts: 2000
+    target_policy_noise: 0.5
+    target_noise_clip: 1
+    action_noise: VecNoise(BaseNoise=NormalActionNoise(mu=[0 0 0], sigma=[0.5 0.5
+      0.5])), n_envs=1)
+    batch_size: 128
+    learning_rate: 0.0003
+    policy_delay: 2
+    policy_kwargs:
+      net_arch:
+        pi:
+        - 256
+        - 256
+        qf:
+        - 256
+        - 256
+      pointnet_in_dim: 4
+      pointnet_out_dim: 32
+      pointnet_batchnorm: false
+      pointnet_layernorm: true
+      zero_init_output: true
+      use_relative_motion: true
+    device: cuda:0
+    seed: 0
+    tensorboard_log: /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/scripts/../training_log/long_open_lock_2024-03-12_00-17-04.977
+train:
+  desc: null
+  value:
+    algorithm_name: TD3
+    total_timesteps: 100000
+    log_interval: 10
+    checkpoint_every: 2000
+    eval_freq: 2000
+    n_eval: 50
+    parallel: 1
+    seed: 0
+    device: cuda:0
+    gpu: 0
+    name: long_open_lock
+    wandb_name: ManiSkill_ViTac
+    emp: {}
+cfg:
+  desc: null
+  value: configs/parameters/long_open_lock.yaml
+no_render:
+  desc: null
+  value: false
+_wandb:
+  desc: null
+  value:
+    code_path: code/scripts/universal_training_script.py
+    python_version: 3.10.0
+    cli_version: 0.16.0
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1710173833.914381
+    t:
+      1:
+      - 1
+      - 5
+      - 53
+      - 55
+      3:
+      - 13
+      - 16
+      - 23
+      - 35
+      4: 3.10.0
+      5: 0.16.0
+      8:
+      - 5
+      13: linux-x86_64

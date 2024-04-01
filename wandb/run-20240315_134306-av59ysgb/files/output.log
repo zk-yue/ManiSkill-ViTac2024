@@ -1,0 +1,4 @@
+
+Logging to /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/scripts/../training_log/long_open_lock_2024-03-15_13-42-53.767/SAC_1
+/home/yuezk/anaconda3/envs/mani_vitac/lib/python3.10/site-packages/stable_baselines3/common/callbacks.py:403: UserWarning: Training and eval env are not of the same type<stable_baselines3.common.vec_env.subproc_vec_env.SubprocVecEnv object at 0x7ff0ac104b80> != <stable_baselines3.common.vec_env.dummy_vec_env.DummyVecEnv object at 0x7fef5bddd1e0>
+  warnings.warn("Training and eval env are not of the same type" f"{self.training_env} != {self.eval_env}")

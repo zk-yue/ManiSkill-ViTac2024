@@ -79,9 +79,9 @@ class PointNetActor(Actor):
         l_point_flow_fea = point_flow_fea[:batch_num, ...]
         r_point_flow_fea = point_flow_fea[batch_num:, ...]
 
-        point_flow_fea = torch.cat([l_point_flow_fea, r_point_flow_fea], dim=-1)
+        point_flow_fea = torch.cat([l_point_flow_fea, r_point_flow_fea], dim=-1) # [2*64]
 
-        pred = self.mlp_policy(point_flow_fea)
+        pred = self.mlp_policy(point_flow_fea) # [2*3]
 
         return pred
 

@@ -3,7 +3,7 @@ env:
   max_action: [4.0, 2.0, 2.0]
   step_penalty: 1
   final_reward: 10
-  max_steps: 100
+  max_steps: 10
   sensor_offset_x_range_len: 2.0
   sensor_offset_z_range_len: 2.0
   key_x_max_offset: 10
@@ -52,7 +52,7 @@ env:
     lock_friction: [ 0.0, 1.0 ]
 policy:
   policy_name: TD3PolicyForLongOpenLockPointFlowEnv
-  buffer_size: 200000
+  buffer_size: 20000
   train_freq: 2
   gradient_steps: -1
   learning_starts: 2000
@@ -85,3 +85,4 @@ train:
   device: "cuda"
   gpu: 0
   name: "long_open_lock"
+  wandb_name: ManiSkill_ViTac

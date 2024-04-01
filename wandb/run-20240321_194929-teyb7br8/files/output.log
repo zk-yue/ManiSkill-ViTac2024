@@ -1,0 +1,98 @@
+
+Logging to /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/scripts/../training_log/3shape_1.5mm_batch_size_512_lr_0.0001_2024-03-21_19-49-24.152/SAC_1
+/home/yuezk/anaconda3/envs/mani_vitac/lib/python3.10/site-packages/stable_baselines3/common/callbacks.py:403: UserWarning: Training and eval env are not of the same type<stable_baselines3.common.vec_env.subproc_vec_env.SubprocVecEnv object at 0x7fd5782da680> != <stable_baselines3.common.vec_env.dummy_vec_env.DummyVecEnv object at 0x7fd6e5844970>
+  warnings.warn("Training and eval env are not of the same type" f"{self.training_env} != {self.eval_env}")
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 6        |
+|    fps             | 1        |
+|    time_elapsed    | 23       |
+|    total_timesteps | 44       |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 12       |
+|    fps             | 2        |
+|    time_elapsed    | 37       |
+|    total_timesteps | 96       |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 18       |
+|    fps             | 2        |
+|    time_elapsed    | 50       |
+|    total_timesteps | 132      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0.04     |
+| time/              |          |
+|    episodes        | 24       |
+|    fps             | 2        |
+|    time_elapsed    | 67       |
+|    total_timesteps | 192      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0.0333   |
+| time/              |          |
+|    episodes        | 30       |
+|    fps             | 2        |
+|    time_elapsed    | 78       |
+|    total_timesteps | 224      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0.0556   |
+| time/              |          |
+|    episodes        | 36       |
+|    fps             | 3        |
+|    time_elapsed    | 93       |
+|    total_timesteps | 284      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0.0476   |
+| time/              |          |
+|    episodes        | 42       |
+|    fps             | 3        |
+|    time_elapsed    | 104      |
+|    total_timesteps | 316      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    success_rate    | 0.0417   |
+| time/              |          |
+|    episodes        | 48       |
+|    fps             | 3        |
+|    time_elapsed    | 116      |
+|    total_timesteps | 356      |
+---------------------------------
+Traceback (most recent call last):
+  File "/home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/scripts/train_sac.py", line 179, in <module>
+    model.learn(
+  File "/home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/scripts/../solutions/sac_custom.py", line 307, in learn
+    return super().learn(
+  File "/home/yuezk/anaconda3/envs/mani_vitac/lib/python3.10/site-packages/stable_baselines3/common/off_policy_algorithm.py", line 312, in learn
+    rollout = self.collect_rollouts(
+  File "/home/yuezk/anaconda3/envs/mani_vitac/lib/python3.10/site-packages/stable_baselines3/common/off_policy_algorithm.py", line 544, in collect_rollouts
+    new_obs, rewards, dones, infos = env.step(actions)
+  File "/home/yuezk/anaconda3/envs/mani_vitac/lib/python3.10/site-packages/stable_baselines3/common/vec_env/base_vec_env.py", line 197, in step
+    return self.step_wait()
+  File "/home/yuezk/anaconda3/envs/mani_vitac/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 130, in step_wait
+    results = [remote.recv() for remote in self.remotes]
+  File "/home/yuezk/anaconda3/envs/mani_vitac/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 130, in <listcomp>
+    results = [remote.recv() for remote in self.remotes]
+  File "/home/yuezk/anaconda3/envs/mani_vitac/lib/python3.10/multiprocessing/connection.py", line 255, in recv
+    buf = self._recv_bytes()
+  File "/home/yuezk/anaconda3/envs/mani_vitac/lib/python3.10/multiprocessing/connection.py", line 419, in _recv_bytes
+    buf = self._recv(4)
+  File "/home/yuezk/anaconda3/envs/mani_vitac/lib/python3.10/multiprocessing/connection.py", line 384, in _recv
+    chunk = read(handle, remaining)
+KeyboardInterrupt

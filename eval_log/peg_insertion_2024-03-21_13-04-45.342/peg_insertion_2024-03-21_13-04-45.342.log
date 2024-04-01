@@ -1,0 +1,58 @@
+2024-03-21 13:04:45.348 | INFO     | __main__:evaluate_policy:40 - #KEY: 1
+2024-03-21 13:04:45.358 | INFO     | __main__:evaluate_policy:51 - 
+-----------Parameters-----------------
+          allow_self_collision: 0.0                                                         
+                 ccd_max_iters: 100.0                                                       
+                 ccd_slackness: 0.7                                                         
+       ccd_tet_inversion_thres: 0.0                                                         
+                 ccd_thickness: 1e-06                                                       
+             ee_classify_thres: 0.001                                                       
+            ee_mollifier_thres: 0.001                                                       
+              gripper_x_offset: 0.0                                                         
+              gripper_z_offset: -8.0                                                        
+                 hole_friction: 0.5                                                         
+             indentation_depth: 0.875                                                       
+         line_search_max_iters: 10.0                                                        
+                  peg_friction: 9.5                                                         
+                     sim_d_hat: 0.0001                                                      
+                     sim_eps_d: 0.0                                                         
+                     sim_eps_v: 0.01                                                        
+                     sim_kappa: 100.0                                                       
+              sim_kappa_affine: 100000.0                                                    
+                 sim_kappa_con: 10000000000.0                                               
+ sim_solver_cg_error_frequency: 10.0                                                        
+ sim_solver_cg_error_tolerance: 0.0                                                         
+       sim_solver_cg_max_iters: 50.0                                                        
+   sim_solver_newton_max_iters: 5.0                                                         
+                 sim_time_step: 0.1                                                         
+                 tac_density_l: 1000.0                                                      
+                 tac_density_r: 1000.0                                                      
+         tac_elastic_modulus_l: 300000.0                                                    
+         tac_elastic_modulus_r: 300000.0                                                    
+                  tac_friction: 87.5                                                        
+           tac_poisson_ratio_l: 0.3                                                         
+           tac_poisson_ratio_r: 0.3                                                         
+          tac_sensor_meta_file: gelsight_mini_e430/meta_file                                
+-----------------------End-----------------------
+
+2024-03-21 13:04:45.358 | INFO     | __main__:evaluate_policy:52 - {'final_reward': 10, 'marker_interval_range': [1.95, 2.15], 'marker_lose_tracking_probability': 0.01, 'marker_pos_shift_range': [0.1, 0.1], 'marker_random_noise': 0.5, 'marker_rotation_range': 0.1, 'marker_translation_range': [1, 1], 'max_action': [2.0, 2.0, 4.0], 'max_steps': 8, 'normalize': False, 'peg_hole_path_file': 'configs/peg_insertion/3shape_1.5mm.txt', 'peg_theta_max_offset': 10.0, 'peg_x_max_offset': 5.0, 'peg_y_max_offset': 5.0, 'step_penalty': 1, 'z_step_size': 0.125}
+2024-03-21 13:04:45.825 | INFO     | __main__:evaluate_policy:83 - #### Test No. 1 ####
+2024-03-21 13:04:47.668 | INFO     | __main__:evaluate_policy:86 - Initial offset: [-4. -4. -8.]
+2024-03-21 13:04:47.693 | INFO     | __main__:evaluate_policy:95 - Step 1 Action: [ 0.46041182  0.99972856 -0.42221308]
+2024-03-21 13:04:47.836 | INFO     | __main__:evaluate_policy:99 - Offset: [-2.8098671 -2.1481555 -9.688852 ]
+2024-03-21 13:04:47.874 | INFO     | __main__:evaluate_policy:95 - Step 2 Action: [0.90169513 0.35269266 0.83922654]
+2024-03-21 13:04:48.016 | INFO     | __main__:evaluate_policy:99 - Offset: [-0.91348535 -1.7563378  -6.3319464 ]
+2024-03-21 13:04:48.022 | INFO     | __main__:evaluate_policy:95 - Step 3 Action: [-0.17251623  0.39030728  0.8978773 ]
+2024-03-21 13:04:48.150 | INFO     | __main__:evaluate_policy:99 - Offset: [-1.1703202 -0.9424321 -2.740437 ]
+2024-03-21 13:04:48.174 | INFO     | __main__:evaluate_policy:95 - Step 4 Action: [-0.16240753  0.6458228  -0.868879  ]
+2024-03-21 13:04:48.287 | INFO     | __main__:evaluate_policy:99 - Offset: [-1.4330083   0.36326626 -6.215953  ]
+2024-03-21 13:04:48.293 | INFO     | __main__:evaluate_policy:95 - Step 5 Action: [ 0.7264132 -0.7053868  0.9998607]
+2024-03-21 13:04:48.405 | INFO     | __main__:evaluate_policy:99 - Offset: [-0.1414765 -1.1965197 -2.2165103]
+2024-03-21 13:04:48.509 | INFO     | __main__:evaluate_policy:95 - Step 6 Action: [0.1919479  0.7324951  0.23474169]
+2024-03-21 13:04:48.623 | INFO     | __main__:evaluate_policy:99 - Offset: [ 0.2987917   0.25252703 -1.2775435 ]
+2024-03-21 13:04:48.626 | INFO     | __main__:evaluate_policy:95 - Step 7 Action: [-0.31854716  0.33829406 -0.27824095]
+2024-03-21 13:04:48.687 | INFO     | __main__:evaluate_policy:99 - Offset: [-0.32305938  0.9431513  -2.3905072 ]
+2024-03-21 13:04:48.693 | INFO     | __main__:evaluate_policy:95 - Step 8 Action: [-0.1204967  -0.01780785 -0.07182926]
+2024-03-21 13:04:48.754 | INFO     | __main__:evaluate_policy:99 - Offset: [-0.5653286   0.91761845 -2.6778245 ]
+2024-03-21 13:04:48.754 | INFO     | __main__:evaluate_policy:106 - RESULT: FAIL
+2024-03-21 13:04:48.754 | INFO     | __main__:evaluate_policy:83 - #### Test No. 2 ####

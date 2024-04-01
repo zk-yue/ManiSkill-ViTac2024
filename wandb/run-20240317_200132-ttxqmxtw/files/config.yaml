@@ -1,0 +1,393 @@
+wandb_version: 1
+
+env:
+  desc: null
+  value:
+    step_penalty: 1
+    final_reward: 10
+    max_action:
+    - 2.0
+    - 2.0
+    - 4.0
+    max_steps: 100
+    z_step_size: 0.125
+    peg_hole_path_file: configs/peg_insertion/3shape_2.0mm.txt
+    peg_x_max_offset: 5.0
+    peg_y_max_offset: 5.0
+    peg_theta_max_offset: 10.0
+    marker_interval_range:
+    - 1.95
+    - 2.15
+    marker_rotation_range: 0.1
+    marker_translation_range:
+    - 1
+    - 1
+    marker_pos_shift_range:
+    - 0.1
+    - 0.1
+    marker_random_noise: 0.5
+    marker_lose_tracking_probability: 0.01
+    normalize: false
+policy:
+  desc: null
+  value:
+    buffer_size: 200000
+    train_freq: 2
+    gradient_steps: -1
+    learning_starts: 2000
+    action_noise: VecNoise(BaseNoise=NormalActionNoise(mu=[0 0 0], sigma=[0.5 0.5
+      0.5])), n_envs=6)
+    batch_size: 256
+    learning_rate: 0.0001
+    optimize_memory_usage: false
+    ent_coef: auto
+    target_update_interval: 1
+    target_entropy: auto
+    use_sde: false
+    sde_sample_freq: -1
+    use_sde_at_warmup: false
+    policy_kwargs:
+      pointnet_in_dim: 4
+      pointnet_out_dim: 32
+      pointnet_batchnorm: false
+      pointnet_layernorm: true
+      zero_init_output: true
+      use_sde: false
+    device: cuda:0
+    seed: 0
+    tensorboard_log: /media/lab/data/yzk/ManiSkill-ViTac2024/scripts/../training_log/3shape_2.0mm_2024-03-17_20-01-27.795
+train:
+  desc: null
+  value:
+    total_timesteps: 500000
+    log_interval: 10
+    checkpoint_every: 2000
+    eval_freq: 2000
+    n_eval: 50
+    parallel: 6
+    seed: 0
+    device: cuda:0
+    gpu: 0
+    name: 3shape_2.0mm
+    wandb_name: ManiSkill_ViTac
+    emp: {}
+cfg:
+  desc: null
+  value: configs/parameters/peg_insertion_sac.yaml
+no_render:
+  desc: null
+  value: false
+_wandb:
+  desc: null
+  value:
+    code_path: code/scripts/train_sac.py
+    python_version: 3.10.0
+    cli_version: 0.16.0
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1710676892.941149
+    t:
+      1:
+      - 1
+      - 5
+      - 53
+      - 55
+      2:
+      - 1
+      - 5
+      - 53
+      - 55
+      3:
+      - 13
+      - 16
+      - 22
+      - 23
+      - 35
+      4: 3.10.0
+      5: 0.16.0
+      8:
+      - 5
+      13: linux-x86_64
+algo:
+  desc: null
+  value: SAC
+policy_class:
+  desc: null
+  value: <class 'solutions.policies_sac.SACPolicyForPointFlowEnv'>
+device:
+  desc: null
+  value: cuda:0
+verbose:
+  desc: null
+  value: 1
+policy_kwargs:
+  desc: null
+  value: '{''pointnet_in_dim'': 4, ''pointnet_out_dim'': 32, ''pointnet_batchnorm'':
+    False, ''pointnet_layernorm'': True, ''zero_init_output'': True, ''use_sde'':
+    False}'
+num_timesteps:
+  desc: null
+  value: 0
+_total_timesteps:
+  desc: null
+  value: 500000
+_num_timesteps_at_start:
+  desc: null
+  value: 0
+seed:
+  desc: null
+  value: 0
+action_noise:
+  desc: null
+  value: VecNoise(BaseNoise=NormalActionNoise(mu=[0 0 0], sigma=[0.5 0.5 0.5])), n_envs=6)
+start_time:
+  desc: null
+  value: 1710676897781830830
+learning_rate:
+  desc: null
+  value: 0.0001
+tensorboard_log:
+  desc: null
+  value: /media/lab/data/yzk/ManiSkill-ViTac2024/scripts/../training_log/3shape_2.0mm_2024-03-17_20-01-27.795
+_last_obs:
+  desc: null
+  value: "OrderedDict([('gt_offset', array([[ 3.5122283 , -2.5315201 , -3.417064 \
+    \ ],\n       [ 0.9704882 , -3.2896297 , -7.97655   ],\n       [ 3.138263  , -3.5406508\
+    \ ,  9.901393  ],\n       [ 2.4175165 , -3.6172733 , -6.6192675 ],\n       [ 1.4331838\
+    \ ,  1.1707908 , -4.815131  ],\n       [-3.885775  ,  0.14433771, -3.1373725 ]],\
+    \ dtype=float32)), ('marker_flow', array([[[[[  7.362539 ,  44.057564 ],\n   \
+    \       [ 41.877556 ,  42.570736 ],\n          [ 74.443405 ,  41.117565 ],\n \
+    \         ...,\n          [282.01373  , 225.68141  ],\n          [282.01373  ,\
+    \ 225.68141  ],\n          [282.01373  , 225.68141  ]],\n\n         [[ 10.292645\
+    \ ,  44.59899  ],\n          [ 45.167698 ,  41.49587  ],\n          [ 77.558174\
+    \ ,  39.755527 ],\n          ...,\n          [284.1105   , 225.096    ],\n   \
+    \       [284.1105   , 225.096    ],\n          [284.1105   , 225.096    ]]],\n\
+    \n\n        [[[  9.752227 ,  11.605276 ],\n          [ 42.48737  ,  14.800144\
+    \ ],\n          [ 72.671135 ,  12.429433 ],\n          ...,\n          [294.23975\
+    \  , 233.60376  ],\n          [294.23975  , 233.60376  ],\n          [294.23975\
+    \  , 233.60376  ]],\n\n         [[ 12.69771  ,  11.824275 ],\n          [ 44.29158\
+    \  ,  13.171341 ],\n          [ 77.036896 ,  11.622862 ],\n          ...,\n  \
+    \        [296.78854  , 234.83034  ],\n          [296.78854  , 234.83034  ],\n\
+    \          [296.78854  , 234.83034  ]]]],\n\n\n\n       [[[[130.24895  ,  13.530175\
+    \ ],\n          [159.7936   ,  15.375652 ],\n          [192.83617  ,  21.248184\
+    \ ],\n          ...,\n          [170.61371  , 234.0866   ],\n          [170.61371\
+    \  , 234.0866   ],\n          [170.61371  , 234.0866   ]],\n\n         [[133.35959\
+    \  ,  12.867061 ],\n          [163.99109  ,  14.855667 ],\n          [196.33054\
+    \  ,  21.051329 ],\n          ...,\n          [174.6354   , 234.9612   ],\n  \
+    \        [174.6354   , 234.9612   ],\n          [174.6354   , 234.9612   ]]],\n\
+    \n\n        [[[ 12.444195 ,  19.228037 ],\n          [ 46.063217 ,  21.093243\
+    \ ],\n          [ 79.73273  ,  22.097898 ],\n          ...,\n          [310.5315\
+    \   , 224.64894  ],\n          [310.5315   , 224.64894  ],\n          [310.5315\
+    \   , 224.64894  ]],\n\n         [[ 15.644551 ,  20.538412 ],\n          [ 49.081963\
+    \ ,  20.07507  ],\n          [ 82.66311  ,  21.980291 ],\n          ...,\n   \
+    \       [313.38693  , 225.1139   ],\n          [313.38693  , 225.1139   ],\n \
+    \         [313.38693  , 225.1139   ]]]],\n\n\n\n       [[[[ 14.834163 ,  19.634422\
+    \ ],\n          [ 46.255295 ,  17.356665 ],\n          [ 76.7975   ,  16.68664\
+    \  ],\n          ...,\n          [291.84024  , 221.05603  ],\n          [291.84024\
+    \  , 221.05603  ],\n          [291.84024  , 221.05603  ]],\n\n         [[ 17.112507\
+    \ ,  19.718521 ],\n          [ 48.704147 ,  18.02215  ],\n          [ 79.80038\
+    \  ,  14.785108 ],\n          ...,\n          [294.48276  , 220.60722  ],\n  \
+    \        [294.48276  , 220.60722  ],\n          [294.48276  , 220.60722  ]]],\n\
+    \n\n        [[[ 21.221731 ,  31.619947 ],\n          [ 54.842545 ,  33.550762\
+    \ ],\n          [120.036224 ,  35.02571  ],\n          ...,\n          [311.85248\
+    \  , 231.15579  ],\n          [311.85248  , 231.15579  ],\n          [311.85248\
+    \  , 231.15579  ]],\n\n         [[ 23.950642 ,  31.979156 ],\n          [ 57.41297\
+    \  ,  33.51376  ],\n          [122.59669  ,  34.51964  ],\n          ...,\n  \
+    \        [315.15924  , 231.37743  ],\n          [315.15924  , 231.37743  ],\n\
+    \          [315.15924  , 231.37743  ]]]],\n\n\n\n       [[[[173.17172  ,  13.884808\
+    \ ],\n          [206.47508  ,  14.974447 ],\n          [242.20364  ,  18.801353\
+    \ ],\n          ...,\n          [ 81.137024 , 236.65724  ],\n          [ 81.137024\
+    \ , 236.65724  ],\n          [ 81.137024 , 236.65724  ]],\n\n         [[176.87778\
+    \  ,  12.7143   ],\n          [210.31497  ,  14.819985 ],\n          [245.58134\
+    \  ,  18.632221 ],\n          ...,\n          [ 85.3324   , 236.63618  ],\n  \
+    \        [ 85.3324   , 236.63618  ],\n          [ 85.3324   , 236.63618  ]]],\n\
+    \n\n        [[[ 10.750198 ,  13.566439 ],\n          [ 45.4029   ,  16.215084\
+    \ ],\n          [ 79.55662  ,  15.493709 ],\n          ...,\n          [307.1855\
+    \   , 217.00548  ],\n          [307.1855   , 217.00548  ],\n          [307.1855\
+    \   , 217.00548  ]],\n\n         [[ 12.972097 ,  12.970214 ],\n          [ 48.20631\
+    \  ,  15.885669 ],\n          [ 82.94041  ,  15.7619295],\n          ...,\n  \
+    \        [310.91617  , 217.90352  ],\n          [310.91617  , 217.90352  ],\n\
+    \          [310.91617  , 217.90352  ]]]],\n\n\n\n       [[[[  6.2268457,  22.175516\
+    \ ],\n          [ 37.495846 ,  22.248413 ],\n          [ 72.49569  ,  20.029074\
+    \ ],\n          ...,\n          [287.72327  , 237.22543  ],\n          [287.72327\
+    \  , 237.22543  ],\n          [287.72327  , 237.22543  ]],\n\n         [[ 11.004215\
+    \ ,  23.064968 ],\n          [ 41.4754   ,  21.834162 ],\n          [ 76.974 \
+    \   ,  19.88166  ],\n          ...,\n          [291.29156  , 237.90643  ],\n \
+    \         [291.29156  , 237.90643  ],\n          [291.29156  , 237.90643  ]]],\n\
+    \n\n        [[[271.01224  ,   8.962814 ],\n          [ 24.833601 ,  30.553991\
+    \ ],\n          [ 63.013103 ,  32.416294 ],\n          ...,\n          [155.62491\
+    \  , 236.04837  ],\n          [155.62491  , 236.04837  ],\n          [155.62491\
+    \  , 236.04837  ]],\n\n         [[273.59717  ,   8.71147  ],\n          [ 28.247131\
+    \ ,  30.719183 ],\n          [ 64.33161  ,  33.211765 ],\n          ...,\n   \
+    \       [158.978    , 236.42526  ],\n          [158.978    , 236.42526  ],\n \
+    \         [158.978    , 236.42526  ]]]],\n\n\n\n       [[[[ 33.841118 ,  19.253942\
+    \ ],\n          [ 67.75678  ,  21.252815 ],\n          [102.68615  ,  22.716253\
+    \ ],\n          ...,\n          [291.10483  , 226.71223  ],\n          [291.10483\
+    \  , 226.71223  ],\n          [291.10483  , 226.71223  ]],\n\n         [[ 36.46371\
+    \  ,  19.023556 ],\n          [ 70.387886 ,  20.949446 ],\n          [104.9941\
+    \   ,  21.370495 ],\n          ...,\n          [293.44147  , 226.68387  ],\n \
+    \         [293.44147  , 226.68387  ],\n          [293.44147  , 226.68387  ]]],\n\
+    \n\n        [[[ 16.881365 ,  42.66538  ],\n          [ 51.968597 ,  39.852467\
+    \ ],\n          [ 83.295204 ,  38.93069  ],\n          ...,\n          [299.31757\
+    \  , 212.48706  ],\n          [299.31757  , 212.48706  ],\n          [299.31757\
+    \  , 212.48706  ]],\n\n         [[ 18.606136 ,  43.123466 ],\n          [ 53.951183\
+    \ ,  40.242817 ],\n          [ 86.42739  ,  37.82257  ],\n          ...,\n   \
+    \       [301.8743   , 213.27875  ],\n          [301.8743   , 213.27875  ],\n \
+    \         [301.8743   , 213.27875  ]]]]], dtype=float32))])"
+_last_episode_starts:
+  desc: null
+  value: '[ True  True  True  True  True  True]'
+_last_original_obs:
+  desc: null
+  value: None
+_episode_num:
+  desc: null
+  value: 0
+use_sde:
+  desc: null
+  value: 'False'
+sde_sample_freq:
+  desc: null
+  value: -1
+_current_progress_remaining:
+  desc: null
+  value: 1.0
+_stats_window_size:
+  desc: null
+  value: 100
+ep_info_buffer:
+  desc: null
+  value: deque([], maxlen=100)
+ep_success_buffer:
+  desc: null
+  value: deque([], maxlen=100)
+_n_updates:
+  desc: null
+  value: 0
+_custom_logger:
+  desc: null
+  value: 'False'
+_vec_normalize_env:
+  desc: null
+  value: None
+observation_space:
+  desc: null
+  value: 'Dict(''gt_offset'': Box(-3.4028235e+38, 3.4028235e+38, (3,), float32), ''marker_flow'':
+    Box(-3.4028235e+38, 3.4028235e+38, (2, 2, 128, 2), float32))'
+action_space:
+  desc: null
+  value: Box(-1.0, 1.0, (3,), float32)
+n_envs:
+  desc: null
+  value: 6
+buffer_size:
+  desc: null
+  value: 200000
+batch_size:
+  desc: null
+  value: 256
+learning_starts:
+  desc: null
+  value: 2000
+tau:
+  desc: null
+  value: 0.005
+gamma:
+  desc: null
+  value: 0.99
+gradient_steps:
+  desc: null
+  value: -1
+optimize_memory_usage:
+  desc: null
+  value: 'False'
+replay_buffer:
+  desc: null
+  value: <stable_baselines3.common.buffers.DictReplayBuffer object at 0x7f1bd804bb80>
+replay_buffer_class:
+  desc: null
+  value: <class 'stable_baselines3.common.buffers.DictReplayBuffer'>
+replay_buffer_kwargs:
+  desc: null
+  value: '{}'
+_episode_storage:
+  desc: null
+  value: None
+train_freq:
+  desc: null
+  value: 'TrainFreq(frequency=2, unit=<TrainFrequencyUnit.STEP: ''step''>)'
+use_sde_at_warmup:
+  desc: null
+  value: 'False'
+target_entropy:
+  desc: null
+  value: -3.0
+log_ent_coef:
+  desc: null
+  value: tensor([0.], device='cuda:0', requires_grad=True)
+ent_coef:
+  desc: null
+  value: auto
+target_update_interval:
+  desc: null
+  value: 1
+ent_coef_optimizer:
+  desc: null
+  value: "Adam (\nParameter Group 0\n    amsgrad: False\n    betas: (0.9, 0.999)\n\
+    \    capturable: False\n    differentiable: False\n    eps: 1e-08\n    foreach:\
+    \ None\n    fused: None\n    lr: 0.0001\n    maximize: False\n    weight_decay:\
+    \ 0\n)"
+lr_schedule:
+  desc: null
+  value: <function constant_fn.<locals>.func at 0x7f1bd8059990>
+actor:
+  desc: null
+  value: "Actor(\n  (features_extractor): FeatureExtractorWithPointNetEncoder(\n \
+    \   (feature_extractor_net): PointNetFeatureExtractor(\n      (pointnet_local_fea):\
+    \ Sequential(\n        (0): Conv1d(4, 64, kernel_size=(1,), stride=(1,))\n   \
+    \     (1): Identity()\n        (2): ReLU()\n        (3): Conv1d(64, 64, kernel_size=(1,),\
+    \ stride=(1,))\n        (4): Identity()\n        (5): ReLU()\n      )\n      (pointnet_global_fea):\
+    \ PointNetFeaNew(\n        (conv0): Conv1d(64, 64, kernel_size=(1,), stride=(1,))\n\
+    \        (bn0): Identity()\n        (conv1): Conv1d(64, 128, kernel_size=(1,),\
+    \ stride=(1,))\n        (bn1): Identity()\n        (conv2): Conv1d(128, 512, kernel_size=(1,),\
+    \ stride=(1,))\n        (bn2): Identity()\n      )\n      (mlp_output): Sequential(\n\
+    \        (0): Linear(in_features=512, out_features=256, bias=True)\n        (1):\
+    \ ReLU()\n        (2): Linear(in_features=256, out_features=256, bias=True)\n\
+    \        (3): ReLU()\n        (4): Linear(in_features=256, out_features=32, bias=True)\n\
+    \      )\n    )\n  )\n  (latent_pi): Sequential(\n    (0): Linear(in_features=64,\
+    \ out_features=256, bias=True)\n    (1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)\n\
+    \    (2): ReLU()\n    (3): Linear(in_features=256, out_features=256, bias=True)\n\
+    \    (4): LayerNorm((256,), eps=1e-05, elementwise_affine=True)\n    (5): ReLU()\n\
+    \    (6): Linear(in_features=256, out_features=256, bias=True)\n    (7): Tanh()\n\
+    \  )\n  (mu): Linear(in_features=256, out_features=3, bias=True)\n  (log_std):\
+    \ Linear(in_features=256, out_features=3, bias=True)\n)"
+critic:
+  desc: null
+  value: "ContinuousCritic(\n  (features_extractor): CriticFeatureExtractor()\n  (qf0):\
+    \ Sequential(\n    (0): Linear(in_features=6, out_features=256, bias=True)\n \
+    \   (1): ReLU()\n    (2): Linear(in_features=256, out_features=256, bias=True)\n\
+    \    (3): ReLU()\n    (4): Linear(in_features=256, out_features=1, bias=True)\n\
+    \  )\n  (qf1): Sequential(\n    (0): Linear(in_features=6, out_features=256, bias=True)\n\
+    \    (1): ReLU()\n    (2): Linear(in_features=256, out_features=256, bias=True)\n\
+    \    (3): ReLU()\n    (4): Linear(in_features=256, out_features=1, bias=True)\n\
+    \  )\n)"
+critic_target:
+  desc: null
+  value: "ContinuousCritic(\n  (features_extractor): CriticFeatureExtractor()\n  (qf0):\
+    \ Sequential(\n    (0): Linear(in_features=6, out_features=256, bias=True)\n \
+    \   (1): ReLU()\n    (2): Linear(in_features=256, out_features=256, bias=True)\n\
+    \    (3): ReLU()\n    (4): Linear(in_features=256, out_features=1, bias=True)\n\
+    \  )\n  (qf1): Sequential(\n    (0): Linear(in_features=6, out_features=256, bias=True)\n\
+    \    (1): ReLU()\n    (2): Linear(in_features=256, out_features=256, bias=True)\n\
+    \    (3): ReLU()\n    (4): Linear(in_features=256, out_features=1, bias=True)\n\
+    \  )\n)"
+batch_norm_stats:
+  desc: null
+  value: '[]'
+batch_norm_stats_target:
+  desc: null
+  value: '[]'
+_logger:
+  desc: null
+  value: <stable_baselines3.common.logger.Logger object at 0x7f1c1d379d80>

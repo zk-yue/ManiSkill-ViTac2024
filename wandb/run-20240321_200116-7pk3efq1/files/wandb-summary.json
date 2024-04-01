@@ -1,0 +1,1 @@
+{"global_step": 2008, "_timestamp": 1711023201.4673529, "rollout/success_rate": 0.029999999329447746, "time/fps": 2.0, "_runtime": 724.7774538993835, "_step": 45, "_wandb": {"runtime": 723}, "eval/mean_ep_length": 7.920000076293945, "eval/mean_reward": -7.736200332641602, "eval/success_rate": 0.019999999552965164}

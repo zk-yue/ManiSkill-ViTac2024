@@ -1,0 +1,105 @@
+2024-03-15 13:43:07,008 INFO    StreamThr :7907 [internal.py:wandb_internal():86] W&B internal server running at pid: 7907, started at: 2024-03-15 13:43:07.007241
+2024-03-15 13:43:07,013 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: status
+2024-03-15 13:43:07,015 INFO    WriterThread:7907 [datastore.py:open_for_write():85] open: /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/wandb/run-20240315_134306-av59ysgb/run-av59ysgb.wandb
+2024-03-15 13:43:07,016 DEBUG   SenderThread:7907 [sender.py:send():380] send: header
+2024-03-15 13:43:07,017 DEBUG   SenderThread:7907 [sender.py:send():380] send: run
+2024-03-15 13:43:07,866 INFO    SenderThread:7907 [dir_watcher.py:__init__():211] watching files in: /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/wandb/run-20240315_134306-av59ysgb/files
+2024-03-15 13:43:07,867 INFO    SenderThread:7907 [sender.py:_start_run_threads():1124] run started: av59ysgb with start time 1710481387.006577
+2024-03-15 13:43:07,879 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: check_version
+2024-03-15 13:43:07,880 DEBUG   SenderThread:7907 [sender.py:send_request():407] send_request: check_version
+2024-03-15 13:43:08,212 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: run_start
+2024-03-15 13:43:08,247 DEBUG   HandlerThread:7907 [system_info.py:__init__():32] System info init
+2024-03-15 13:43:08,247 DEBUG   HandlerThread:7907 [system_info.py:__init__():47] System info init done
+2024-03-15 13:43:08,247 INFO    HandlerThread:7907 [system_monitor.py:start():194] Starting system monitor
+2024-03-15 13:43:08,248 INFO    SystemMonitor:7907 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-03-15 13:43:08,249 INFO    HandlerThread:7907 [system_monitor.py:probe():214] Collecting system info
+2024-03-15 13:43:08,251 INFO    SystemMonitor:7907 [interfaces.py:start():190] Started cpu monitoring
+2024-03-15 13:43:08,254 INFO    SystemMonitor:7907 [interfaces.py:start():190] Started disk monitoring
+2024-03-15 13:43:08,259 INFO    SystemMonitor:7907 [interfaces.py:start():190] Started gpu monitoring
+2024-03-15 13:43:08,261 INFO    SystemMonitor:7907 [interfaces.py:start():190] Started memory monitoring
+2024-03-15 13:43:08,262 INFO    SystemMonitor:7907 [interfaces.py:start():190] Started network monitoring
+2024-03-15 13:43:08,325 DEBUG   HandlerThread:7907 [system_info.py:probe():196] Probing system
+2024-03-15 13:43:08,330 DEBUG   HandlerThread:7907 [system_info.py:_probe_git():181] Probing git
+2024-03-15 13:43:08,341 DEBUG   HandlerThread:7907 [system_info.py:_probe_git():189] Probing git done
+2024-03-15 13:43:08,341 DEBUG   HandlerThread:7907 [system_info.py:probe():244] Probing system done
+2024-03-15 13:43:08,341 DEBUG   HandlerThread:7907 [system_monitor.py:probe():223] {'os': 'Linux-5.15.0-97-generic-x86_64-with-glibc2.31', 'python': '3.10.0', 'heartbeatAt': '2024-03-15T05:43:08.325371', 'startedAt': '2024-03-15T05:43:06.998198', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/scripts/train_sac.py', 'codePathLocal': 'scripts/train_sac.py', 'codePath': 'scripts/train_sac.py', 'git': {'remote': 'https://github.com/callmeray/ManiSkill-ViTac2024.git', 'commit': '740d2ae4c475eb3d015c236f6fb0961dcad921ff'}, 'email': None, 'root': '/home/yuezk/yzk/ViTac/ManiSkill-ViTac2024', 'host': 'yuezk-OMEN', 'username': 'yuezk', 'executable': '/home/yuezk/anaconda3/envs/mani_vitac/bin/python', 'cpu_count': 24, 'cpu_count_logical': 32, 'cpu_freq': {'current': 2349.764875, 'min': 800.0, 'max': 4575.0}, 'cpu_freq_per_core': [{'current': 2400.0, 'min': 800.0, 'max': 5200.0}, {'current': 2400.0, 'min': 800.0, 'max': 5200.0}, {'current': 2400.0, 'min': 800.0, 'max': 5200.0}, {'current': 2400.0, 'min': 800.0, 'max': 5200.0}, {'current': 2400.0, 'min': 800.0, 'max': 5400.0}, {'current': 2400.0, 'min': 800.0, 'max': 5400.0}, {'current': 1801.238, 'min': 800.0, 'max': 5400.0}, {'current': 2400.0, 'min': 800.0, 'max': 5400.0}, {'current': 2400.0, 'min': 800.0, 'max': 5200.0}, {'current': 2400.0, 'min': 800.0, 'max': 5200.0}, {'current': 2400.0, 'min': 800.0, 'max': 5200.0}, {'current': 2400.0, 'min': 800.0, 'max': 5200.0}, {'current': 2400.0, 'min': 800.0, 'max': 5200.0}, {'current': 2456.169, 'min': 800.0, 'max': 5200.0}, {'current': 2400.0, 'min': 800.0, 'max': 5200.0}, {'current': 2400.0, 'min': 800.0, 'max': 5200.0}, {'current': 2400.0, 'min': 800.0, 'max': 3900.0}, {'current': 2400.0, 'min': 800.0, 'max': 3900.0}, {'current': 2400.0, 'min': 800.0, 'max': 3900.0}, {'current': 2400.0, 'min': 800.0, 'max': 3900.0}, {'current': 2400.0, 'min': 800.0, 'max': 3900.0}, {'current': 2400.0, 'min': 800.0, 'max': 3900.0}, {'current': 2400.0, 'min': 800.0, 'max': 3900.0}, {'current': 2400.0, 'min': 800.0, 'max': 3900.0}, {'current': 2400.0, 'min': 800.0, 'max': 3900.0}, {'current': 2400.0, 'min': 800.0, 'max': 3900.0}, {'current': 2400.0, 'min': 800.0, 'max': 3900.0}, {'current': 2400.0, 'min': 800.0, 'max': 3900.0}, {'current': 2400.0, 'min': 800.0, 'max': 3900.0}, {'current': 2400.0, 'min': 800.0, 'max': 3900.0}, {'current': 2400.0, 'min': 800.0, 'max': 3900.0}, {'current': 2400.0, 'min': 800.0, 'max': 3900.0}], 'disk': {'/': {'total': 233.61745834350586, 'used': 10.552055358886719}}, 'gpu': 'NVIDIA GeForce RTX 4060 Laptop GPU', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 4060 Laptop GPU', 'memory_total': 8585740288}], 'memory': {'total': 15.31075668334961}}
+2024-03-15 13:43:08,341 INFO    HandlerThread:7907 [system_monitor.py:probe():224] Finished collecting system info
+2024-03-15 13:43:08,341 INFO    HandlerThread:7907 [system_monitor.py:probe():227] Publishing system info
+2024-03-15 13:43:08,341 DEBUG   HandlerThread:7907 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2024-03-15 13:43:08,342 DEBUG   HandlerThread:7907 [system_info.py:_save_pip():68] Saving pip packages done
+2024-03-15 13:43:08,342 DEBUG   HandlerThread:7907 [system_info.py:_save_conda():75] Saving list of conda packages installed into the current environment
+2024-03-15 13:43:08,869 INFO    Thread-17 :7907 [dir_watcher.py:_on_file_created():271] file/dir created: /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/wandb/run-20240315_134306-av59ysgb/files/requirements.txt
+2024-03-15 13:43:08,870 INFO    Thread-17 :7907 [dir_watcher.py:_on_file_created():271] file/dir created: /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/wandb/run-20240315_134306-av59ysgb/files/conda-environment.yaml
+2024-03-15 13:43:11,867 INFO    Thread-17 :7907 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/wandb/run-20240315_134306-av59ysgb/files/conda-environment.yaml
+2024-03-15 13:43:11,944 DEBUG   HandlerThread:7907 [system_info.py:_save_conda():87] Saving conda packages done
+2024-03-15 13:43:11,945 DEBUG   HandlerThread:7907 [system_info.py:_save_code():90] Saving code
+2024-03-15 13:43:11,948 DEBUG   HandlerThread:7907 [system_info.py:_save_code():111] Saving code done
+2024-03-15 13:43:11,948 DEBUG   HandlerThread:7907 [system_info.py:_save_patches():128] Saving git patches
+2024-03-15 13:43:11,967 DEBUG   HandlerThread:7907 [system_info.py:_save_patches():170] Saving git patches done
+2024-03-15 13:43:11,970 INFO    HandlerThread:7907 [system_monitor.py:probe():229] Finished publishing system info
+2024-03-15 13:43:11,976 DEBUG   SenderThread:7907 [sender.py:send():380] send: files
+2024-03-15 13:43:11,976 INFO    SenderThread:7907 [sender.py:_save_file():1380] saving file wandb-metadata.json with policy now
+2024-03-15 13:43:11,977 INFO    SenderThread:7907 [sender.py:_save_file():1380] saving file code/scripts/train_sac.py with policy now
+2024-03-15 13:43:11,977 INFO    SenderThread:7907 [sender.py:_save_file():1380] saving file diff.patch with policy now
+2024-03-15 13:43:11,984 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-15 13:43:11,991 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-15 13:43:11,992 DEBUG   SenderThread:7907 [sender.py:send_request():407] send_request: stop_status
+2024-03-15 13:43:12,650 DEBUG   SenderThread:7907 [sender.py:send():380] send: telemetry
+2024-03-15 13:43:12,650 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: status_report
+2024-03-15 13:43:12,652 DEBUG   SenderThread:7907 [sender.py:send():380] send: telemetry
+2024-03-15 13:43:12,868 INFO    Thread-17 :7907 [dir_watcher.py:_on_file_created():271] file/dir created: /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/wandb/run-20240315_134306-av59ysgb/files/wandb-metadata.json
+2024-03-15 13:43:12,869 INFO    Thread-17 :7907 [dir_watcher.py:_on_file_created():271] file/dir created: /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/wandb/run-20240315_134306-av59ysgb/files/code/scripts/train_sac.py
+2024-03-15 13:43:12,869 INFO    Thread-17 :7907 [dir_watcher.py:_on_file_created():271] file/dir created: /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/wandb/run-20240315_134306-av59ysgb/files/diff.patch
+2024-03-15 13:43:12,870 INFO    Thread-17 :7907 [dir_watcher.py:_on_file_created():271] file/dir created: /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/wandb/run-20240315_134306-av59ysgb/files/code
+2024-03-15 13:43:12,870 INFO    Thread-17 :7907 [dir_watcher.py:_on_file_created():271] file/dir created: /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/wandb/run-20240315_134306-av59ysgb/files/code/scripts
+2024-03-15 13:43:13,221 INFO    wandb-upload_0:7907 [upload_job.py:push():131] Uploaded file /tmp/tmpt7082fhkwandb/tqi6eted-wandb-metadata.json
+2024-03-15 13:43:13,492 INFO    wandb-upload_1:7907 [upload_job.py:push():131] Uploaded file /tmp/tmpt7082fhkwandb/9kn06fcz-code/scripts/train_sac.py
+2024-03-15 13:43:13,689 INFO    wandb-upload_2:7907 [upload_job.py:push():131] Uploaded file /tmp/tmpt7082fhkwandb/92c5vh1k-diff.patch
+2024-03-15 13:43:13,711 INFO    HandlerThread:7907 [handler.py:handle_tbrecord():764] handling tbrecord: tbrecord {
+  log_dir: "/home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/scripts/../training_log/long_open_lock_2024-03-15_13-42-53.767/SAC_1"
+  save: true
+}
+control {
+  relay_id: "18344e29f970431389a334f41beee567"
+}
+_info {
+  stream_id: "av59ysgb"
+}
+
+2024-03-15 13:43:13,712 DEBUG   HandlerThread:7907 [config_util.py:dict_from_config_file():101] no default config file found in config-defaults.yaml
+2024-03-15 13:43:13,767 DEBUG   SenderThread:7907 [sender.py:send():380] send: tbrecord
+2024-03-15 13:43:13,773 DEBUG   SenderThread:7907 [sender.py:send():380] send: config
+2024-03-15 13:43:13,774 DEBUG   SenderThread:7907 [sender.py:send():380] send: files
+2024-03-15 13:43:13,774 INFO    SenderThread:7907 [sender.py:_save_file():1380] saving file events.out.tfevents.1710481393.yuezk-OMEN.7500.0 with policy live
+2024-03-15 13:43:13,869 INFO    Thread-17 :7907 [dir_watcher.py:_on_file_created():271] file/dir created: /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/wandb/run-20240315_134306-av59ysgb/files/output.log
+2024-03-15 13:43:13,869 INFO    Thread-17 :7907 [dir_watcher.py:_on_file_created():271] file/dir created: /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/wandb/run-20240315_134306-av59ysgb/files/events.out.tfevents.1710481393.yuezk-OMEN.7500.0
+2024-03-15 13:43:14,508 INFO    wandb-upload_0:7907 [upload_job.py:push():131] Uploaded file /tmp/tmpt7082fhkwandb/4qclv739-events.out.tfevents.1710481393.yuezk-OMEN.7500.0
+2024-03-15 13:43:15,870 INFO    Thread-17 :7907 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/wandb/run-20240315_134306-av59ysgb/files/output.log
+2024-03-15 13:43:17,782 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: status_report
+2024-03-15 13:43:22,783 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: status_report
+2024-03-15 13:43:26,984 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-15 13:43:26,985 DEBUG   SenderThread:7907 [sender.py:send_request():407] send_request: stop_status
+2024-03-15 13:43:26,990 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-15 13:43:28,417 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: status_report
+2024-03-15 13:43:33,419 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: status_report
+2024-03-15 13:43:38,430 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: status_report
+2024-03-15 13:43:39,883 INFO    Thread-17 :7907 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/wandb/run-20240315_134306-av59ysgb/files/config.yaml
+2024-03-15 13:43:41,984 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-15 13:43:41,985 DEBUG   SenderThread:7907 [sender.py:send_request():407] send_request: stop_status
+2024-03-15 13:43:42,024 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-15 13:43:44,368 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: status_report
+2024-03-15 13:43:49,369 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: status_report
+2024-03-15 13:43:54,370 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: status_report
+2024-03-15 13:43:56,984 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-15 13:43:56,985 DEBUG   SenderThread:7907 [sender.py:send_request():407] send_request: stop_status
+2024-03-15 13:43:57,029 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-15 13:43:59,463 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: status_report
+2024-03-15 13:43:59,894 INFO    Thread-17 :7907 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/yuezk/yzk/ViTac/ManiSkill-ViTac2024/wandb/run-20240315_134306-av59ysgb/files/output.log
+2024-03-15 13:44:04,464 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: status_report
+2024-03-15 13:44:08,263 DEBUG   SystemMonitor:7907 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-03-15 13:44:08,268 DEBUG   SenderThread:7907 [sender.py:send():380] send: stats
+2024-03-15 13:44:10,270 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: status_report
+2024-03-15 13:44:11,988 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-15 13:44:11,989 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-15 13:44:11,990 DEBUG   SenderThread:7907 [sender.py:send_request():407] send_request: stop_status
+2024-03-15 13:44:15,379 DEBUG   HandlerThread:7907 [handler.py:handle_request():146] handle_request: status_report

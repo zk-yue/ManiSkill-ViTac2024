@@ -6,7 +6,10 @@ import numpy as np
 import ruamel.yaml as yaml
 import torch
 from stable_baselines3.common.save_util import load_from_zip_file
-
+script_path = os.path.dirname(os.path.realpath(__file__))
+repo_path = os.path.join(script_path, "..")
+sys.path.append(script_path)
+sys.path.insert(0, repo_path)
 from scripts.arguments import parse_params, handle_policy_args
 from envs.peg_insertion import ContinuousInsertionSimGymRandomizedPointFLowEnv
 from path import Path
@@ -17,10 +20,7 @@ from loguru import logger
 from scripts.arguments import parse_params
 from solutions.policies import TD3PolicyForPointFlowEnv
 
-script_path = os.path.dirname(os.path.realpath(__file__))
-repo_path = os.path.join(script_path, "..")
-sys.path.append(script_path)
-sys.path.insert(0, repo_path)
+
 
 EVAL_CFG_FILE = os.path.join(repo_path, "configs/evaluation/peg_insertion_evaluation.yaml")
 PEG_NUM = 3
@@ -120,12 +120,13 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--key", type=str, required=True, help="use the key sent to you")
+    # parser.add_argument("--key", type=str, required=True, help="use the key sent to you")
+    parser.add_argument("--key", type=str, required=False, help="use the key sent to you")
     parser.add_argument("--render_rgb",action="store_true")
     args = parser.parse_args()
     key = args.key
-
-    policy_file = "../pretrain_weight/pretrain_peg_insertion/best_model.zip"
+    key=1
+    policy_file = "./pretrain_weight/pretrain_peg_insertion/best_model"
     data, params, _ = load_from_zip_file(policy_file)
     model = TD3PolicyForPointFlowEnv(observation_space=data["observation_space"],
                                     action_space=data["action_space"],

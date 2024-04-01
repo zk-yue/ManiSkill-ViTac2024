@@ -4,6 +4,19 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
+def latent_pi_net_custom(mlp_in_channels):
+    layernorm = False
+    out_dim = 256
+    latent_pi_net=[nn.Linear(mlp_in_channels, 256),
+            nn.LayerNorm(256) if layernorm else nn.Identity(),
+            nn.ReLU(),
+            nn.Linear(256, 256),
+            nn.LayerNorm(256) if layernorm else nn.Identity(),
+            nn.ReLU(),
+            nn.Linear(256, out_dim),
+            nn.Tanh()]
+    return latent_pi_net, out_dim
+
 
 class PointNetFea(nn.Module):
     def __init__(self, point_dim, output_dim, batchnorm=False):
@@ -39,11 +52,11 @@ class PointNetFea(nn.Module):
         return x
 
 
-class PointNetFeaNew(nn.Module):
+class PointNetFeaNew(nn.Module): # 64->128->512
     def __init__(self, point_dim, net_layers: List, batchnorm=False):
         super(PointNetFeaNew, self).__init__()
-        self.layer_num = len(net_layers)
-        self.conv0 = nn.Conv1d(point_dim, net_layers[0], 1)
+        self.layer_num = len(net_layers) # net_layers=[64, 128, 512]
+        self.conv0 = nn.Conv1d(point_dim, net_layers[0], 1) # point_dim=64
         self.bn0 = nn.BatchNorm1d(net_layers[0]) if batchnorm else nn.Identity()
         for i in range(0, self.layer_num - 1):
             self.__setattr__(f"conv{i + 1}", nn.Conv1d(net_layers[i], net_layers[i + 1], 1))
@@ -71,15 +84,15 @@ class PointNetFeatureExtractor(nn.Module):
     need to distinguish this from other modules defined in feature_extractors.py
     those modules are only used to extract the corresponding input (e.g. point flow, manual feature, etc.) from original observations
     """
-    def __init__(self, dim, out_dim, batchnorm=False):
+    def __init__(self, dim, out_dim, batchnorm=False): # out_dim=32
         super(PointNetFeatureExtractor, self).__init__()
-        self.dim = dim
+        self.dim = dim # 4
 
         self.pointnet_local_feature_num = 64
         self.pointnet_global_feature_num = 512
         # self.mlp_feature_num = 256  # self.pointnet_global_feature_num  #256
 
-        self.pointnet_local_fea = nn.Sequential(
+        self.pointnet_local_fea = nn.Sequential( # 4->64->64->64
             nn.Conv1d(dim, self.pointnet_local_feature_num, 1),
             nn.BatchNorm1d(self.pointnet_local_feature_num) if batchnorm else nn.Identity(),
             nn.ReLU(),
@@ -87,7 +100,7 @@ class PointNetFeatureExtractor(nn.Module):
             nn.BatchNorm1d(self.pointnet_local_feature_num) if batchnorm else nn.Identity(),
             nn.ReLU(),
         )
-        self.pointnet_global_fea = PointNetFeaNew(self.pointnet_local_feature_num, [64, 128, self.pointnet_global_feature_num], batchnorm=batchnorm)
+        self.pointnet_global_fea = PointNetFeaNew(self.pointnet_local_feature_num, [64, 128, self.pointnet_global_feature_num], batchnorm=batchnorm) # 64->128->512
         # self.pointnet_total_fea = PointNetFeaNew(
         #     self.pointnet_local_feature_num + self.pointnet_global_feature_num, [512, self.mlp_feature_num], batchnorm=batchnorm
         # )
@@ -101,18 +114,18 @@ class PointNetFeatureExtractor(nn.Module):
         :param marker_pos: Tensor, size (batch, num_points, 4)
         :return:
         """
-        if marker_pos.ndim == 2:
+        if marker_pos.ndim == 2: # marker_pos：torch.Size([128, 128, 4])
             marker_pos = torch.unsqueeze(marker_pos, dim=0)
 
-        marker_pos = torch.transpose(marker_pos, 1, 2)
+        marker_pos = torch.transpose(marker_pos, 1, 2) # torch.Size([128, 4, 128]) 特征维放到第二个位置
 
-        batch_num = marker_pos.shape[0]
-        point_num = marker_pos.shape[2]
+        # batch_num = marker_pos.shape[0] # 128
+        # point_num = marker_pos.shape[2] # 128
 
-        local_feature = self.pointnet_local_fea(marker_pos)  # (batch_num, self.pointnet_local_feature_num, point_num)
+        local_feature = self.pointnet_local_fea(marker_pos)  # (batch_num, self.pointnet_local_feature_num, point_num) torch.Size([128, 64, 128])
         # shape: (batch, step * 2, num_points)
         global_feature = self.pointnet_global_fea(local_feature).view(
-            -1, self.pointnet_global_feature_num)  # (batch_num, self.pointnet_global_feature_num)
+            -1, self.pointnet_global_feature_num)  # (batch_num, self.pointnet_global_feature_num) # torch.Size([128, 512])
 
         # global_feature = global_feature.repeat(
         #     (1, 1, point_num)
