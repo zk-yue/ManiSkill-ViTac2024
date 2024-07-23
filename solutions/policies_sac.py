@@ -14,21 +14,58 @@ from solutions.networks import PointNetFeatureExtractor
 import torch
 from torch import nn
 
-class LSTM(nn.Module):
-    def __init__(self, input_size, hidden_size, num_layers, output_size):
-        super().__init__()
-        self.hidden_size = hidden_size
-        self.num_layers = num_layers
-        self.lstm = nn.LSTM(input_size, hidden_size, num_layers)
-        self.fc = nn.Linear(hidden_size, output_size)
+# class LSTM(nn.Module):
+#     def __init__(self, input_size, hidden_size, num_layers, output_size):
+#         super().__init__()
+#         self.hidden_size = hidden_size
+#         self.num_layers = num_layers
+#         self.lstm = nn.LSTM(input_size, hidden_size, num_layers)
+#         self.fc = nn.Linear(hidden_size, output_size)
  
-    def forward(self, x):
-        h0 = torch.zeros(self.num_layers, x.size(1), self.hidden_size).to(x.device)
-        c0 = torch.zeros(self.num_layers, x.size(1), self.hidden_size).to(x.device)
-        out, _ = self.lstm(x, (h0, c0))
-        out = self.fc(out[-1, :, :])
-        return out
+#     def forward(self, x):
+#         h0 = torch.zeros(self.num_layers, x.size(1), self.hidden_size).to(x.device)
+#         c0 = torch.zeros(self.num_layers, x.size(1), self.hidden_size).to(x.device)
+#         out, _ = self.lstm(x, (h0, c0))
+#         out = self.fc(out[-1, :, :])
+#         return out
  
+
+# class CNN(nn.Module):
+#     """
+#     CNN from DQN Nature paper:
+#         Mnih, Volodymyr, et al.
+#         "Human-level control through deep reinforcement learning."
+#         Nature 518.7540 (2015): 529-533.
+
+#     :param observation_space:
+#     :param features_dim_cnn: Number of features extracted.
+#         This corresponds to the number of unit for the last layer.
+#     :param normalized_image: Whether to assume that the image is already normalized
+#         or not (this disables dtype and bounds checks): when True, it only checks that
+#         the space is a Box and has 3 dimensions.
+#         Otherwise, it checks that it has expected dtype (uint8) and bounds (values in [0, 255]).
+#     """
+#     def __init__(self, n_input_channels = 3, features_dim_cnn: int = 512):
+#         super(CNN, self).__init__()
+#         # We assume CxHxW images (channels first)
+#         self.cnn = nn.Sequential(
+#             nn.Conv2d(n_input_channels, 32, kernel_size=8, stride=4, padding=0),
+#             nn.ReLU(),
+#             nn.Conv2d(32, 64, kernel_size=4, stride=2, padding=0),
+#             nn.ReLU(),
+#             nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=0),
+#             nn.ReLU(),
+#             nn.Flatten(),
+#         )
+
+#         # Compute shape by doing one forward pass
+#         with torch.no_grad():
+#             n_flatten = 59904
+
+#         self.linear = nn.Sequential(nn.Linear(n_flatten, features_dim_cnn), nn.ReLU())
+
+#     def forward(self, observations: torch.Tensor) -> torch.Tensor:
+#         return self.linear(self.cnn(observations))
 
 class FeatureExtractorWithPointNetEncoder(BaseFeaturesExtractor):
     """
@@ -37,7 +74,9 @@ class FeatureExtractorWithPointNetEncoder(BaseFeaturesExtractor):
     def __init__(
             self, 
             observation_space: gym.spaces.Dict, 
-            features_dim=64,
+            # features_dim=64,
+            features_dim=128,
+            # features_dim=512,
             use_relative_motion=False,
             dim_add=0
             ):  
@@ -53,19 +92,27 @@ class FeatureExtractorWithPointNetEncoder(BaseFeaturesExtractor):
             self.feature_extractor_net = PointNetFeatureExtractor(
                 dim=pointnet_in_dim, 
                 out_dim=int((features_dim-dim_add) / 2)
+                # out_dim=32
                 )
         else:
             self.feature_extractor_net = PointNetFeatureExtractor(
                 dim=pointnet_in_dim, 
                 out_dim=int(features_dim / 2)
+                # out_dim=32
                 )
         
-        self.lstm=LSTM(
-            input_size = features_dim, 
-            hidden_size = 256, 
-            num_layers = 2, 
-            output_size = features_dim
-            )
+        # self.feature_extractor_net_diff = PointNetFeatureExtractor(
+        #         dim=2, 
+        #         out_dim=32
+        #         )
+        
+        # self.cnn = CNN(n_input_channels=3, features_dim_cnn=256)
+        # self.lstm=LSTM(
+        #     input_size = features_dim, 
+        #     hidden_size = 256, 
+        #     num_layers = 2, 
+        #     output_size = features_dim
+        #     )
 
     def forward(self, observations) -> torch.Tensor:       
         with torch.set_grad_enabled(False):
@@ -92,7 +139,6 @@ class FeatureExtractorWithPointNetEncoder(BaseFeaturesExtractor):
         # l_marker_flow_fea = self.feature_extractor_net(l_marker_pos)
         # r_marker_flow_fea = self.feature_extractor_net(r_marker_pos)  # (batch_num, pointnet_feature_dim)
         marker_flow_fea = torch.cat([marker_flow_fea[:batch_num], marker_flow_fea[batch_num:]], dim=-1) # 2 * pointnet_feature_dim torch.Size([4, 64])
-
         if self.use_relative_motion:
             marker_flow_fea = [marker_flow_fea, ]
             relative_motion = observations["relative_motion"]
@@ -102,15 +148,35 @@ class FeatureExtractorWithPointNetEncoder(BaseFeaturesExtractor):
             # xz = xz.repeat(1, repeat_num)
             marker_flow_fea.append(relative_motion)
             marker_flow_fea = torch.cat(marker_flow_fea, dim=-1)
-        
-        # ---------LSTM---------
-        if marker_flow_fea.ndim == 2:
-            marker_flow_fea = torch.unsqueeze(marker_flow_fea, 0)
-
-        marker_flow_fea = self.lstm(marker_flow_fea)
-        # ---------LSTM---------
-        
         return marker_flow_fea
+        
+        # diff
+        # diff_flow = original_obs[:, :, 0, ...] - original_obs[:, :, 1, ...]
+        # feature_extractor_diff_input = torch.cat([diff_flow[:, 0, ...], diff_flow[:, 1, ...]], dim=0) # 将left_and_right torch.Size([8, 128, 4])
+        # marker_flow_fea_diff = self.feature_extractor_net_diff(feature_extractor_diff_input)
+        # marker_flow_fea_diff = torch.cat([marker_flow_fea_diff[:batch_num], marker_flow_fea_diff[batch_num:]], dim=-1)
+        # return torch.cat([marker_flow_fea, marker_flow_fea_diff], dim=1)
+
+
+        # obs
+        # obs_rgb = observations["rgb_images"] # torch.Size([4, 2, 240, 320, 3])
+        # obs_rgb = obs_rgb.permute(0, 1, 4, 2, 3) #torch.Size([4, 2, 3, 240, 320])
+        # if obs_rgb.ndim == 4:
+        #     obs_rgb = torch.unsqueeze(obs_rgb, 0)
+        # batch_num = obs_rgb.shape[0]
+        # cnn_input = torch.cat([obs_rgb[:, 0, ...], obs_rgb[:, 1, ...]], dim=0) # torch.Size([8 , 3, 240, 320])
+        # obs_rgb_fea = self.cnn(cnn_input)
+        # obs_rgb_fea = torch.cat([obs_rgb_fea[:batch_num], obs_rgb_fea[batch_num:]], dim=-1) 
+        # return obs_rgb_fea
+    
+        # return torch.cat([marker_flow_fea, obs_rgb_fea], dim=1)
+
+        # # ---------LSTM---------
+        # if marker_flow_fea.ndim == 2:
+        #     marker_flow_fea = torch.unsqueeze(marker_flow_fea, 0)
+
+        # marker_flow_fea = self.lstm(marker_flow_fea)
+        # # ---------LSTM---------
 
 
 class SACPolicyForPointFlowEnv(SACPolicy):
@@ -134,6 +200,7 @@ class SACPolicyForPointFlowEnv(SACPolicy):
     def make_actor(self, features_extractor: Optional[BaseFeaturesExtractor] = None) -> Actor:
         actor_kwargs = self._update_features_extractor(
             self.actor_kwargs, FeatureExtractorWithPointNetEncoder(self.observation_space,features_dim=self.pointnet_out_dim * 2)
+            # self.actor_kwargs, FeatureExtractorWithPointNetEncoder(self.observation_space,features_dim=128)
         )
 
         return Actor(**actor_kwargs).to(self.device)

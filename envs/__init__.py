@@ -6,6 +6,11 @@ register(
 )
 
 register(
+    id='ContinuousInsertionRandomizedMarkerEnv-HER-v1',
+    entry_point='envs.peg_insertion_HER:ContinuousInsertionSimGymRandomizedPointFLowEnv',
+)
+
+register(
     id='LongOpenLockRandPointFlowEnv-v1',
     entry_point='envs.long_open_lock:LongOpenLockRandPointFlowEnv',
 )

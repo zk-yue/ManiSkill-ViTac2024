@@ -12,7 +12,7 @@ repo_path = os.path.join(script_path, "..")
 sys.path.append(script_path)
 sys.path.append(repo_path)
 import time
-from typing import List, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union, Optional
 
 import fcl
 import gymnasium as gym
@@ -673,8 +673,9 @@ class ContinuousInsertionSimEnv(gym.Env):
         info = self.get_info()
         obs = self.get_obs(info=info)
         # visualize_marker_point_flow(obs)
-        reward = self.get_reward(info=info, obs=obs)
+        # reward = self.get_reward(info=info, obs=obs)
         # reward = self.get_reward_custom(info=info, obs=obs)
+        reward = float(self.compute_reward(obs["achieved_goal"], obs["desired_goal"], None).item())
         terminated = self.get_terminated(info=info, obs=obs)
         truncated = self.get_truncated(info=info, obs=obs)
         return obs, reward, terminated, truncated, info
@@ -761,6 +762,30 @@ class ContinuousInsertionSimEnv(gym.Env):
 
         return reward
 
+    def compute_reward(
+        self, achieved_goal: Union[int, np.ndarray], desired_goal: Union[int, np.ndarray], _info: Optional[Dict[str, Any]]
+    ) -> np.float32:
+        # As we are using a vectorized version, we need to keep track of the `batch_size`
+        # if isinstance(achieved_goal, int):
+        #     batch_size = 1
+        # elif self.image_obs_space:
+        #     batch_size = achieved_goal.shape[0] if len(achieved_goal.shape) > 3 else 1
+        # else:
+        #     batch_size = achieved_goal.shape[0] if len(achieved_goal.shape) > 1 else 1
+
+        # desired_goal = self.convert_to_bit_vector(desired_goal, batch_size)
+        # achieved_goal = self.convert_to_bit_vector(achieved_goal, batch_size)
+
+        # # Deceptive reward: it is positive only when the goal is achieved
+        # # Here we are using a vectorized version
+        # distance = np.linalg.norm(achieved_goal - desired_goal, axis=-1)
+
+        # if len(achieved_goal.shape)>1:
+        #     batch_size = achieved_goal.shape[0]
+        
+        distance = np.linalg.norm(achieved_goal - desired_goal, axis=-1)
+        return -(distance > 0).astype(np.float32)
+
     # def get_reward_custom(self, info, obs=None):
     #     self.error_evaluation_list.append(evaluate_error(self.current_offset_of_current_episode))
     #     self.error_evaluation_list_2.append(evaluate_error_custom(obs))
@@ -839,6 +864,9 @@ class ContinuousInsertionSimGymRandomizedPointFLowEnv(ContinuousInsertionSimEnv)
             "gt_offset": np.zeros((3,), dtype=np.float32),
             "marker_flow": np.zeros((2, 2, self.marker_flow_size, 2), dtype=np.float32),
             # "marker_flow_seq": np.zeros((4, 2, 2, self.marker_flow_size, 2), dtype=np.float32), # 新增加
+            "achieved_goal": np.zeros((3,), dtype=np.float32),
+            "desired_goal": np.zeros((3,), dtype=np.float32),
+
         }
         if render_rgb:
             self.default_observation["rgb_images"] = np.stack(
@@ -920,6 +948,8 @@ class ContinuousInsertionSimGymRandomizedPointFLowEnv(ContinuousInsertionSimEnv)
                 ],
                 axis=0
             )
+        obs["achieved_goal"] = obs["gt_offset"]
+        obs["desired_goal"] = np.zeros((3,), dtype=np.float32)
         # print("观测一次----------------------------------------------------------------------")
         # if reset == True:
         #     print("观测队列重置----------------------------------------")

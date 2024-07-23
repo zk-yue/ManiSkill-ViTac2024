@@ -14,9 +14,9 @@ from path import Path
 # from solutions.policies import (
 #     TD3PolicyForPointFlowEnv, TD3PolicyForLongOpenLockPointFlowEnv
 # )
-from solutions.policies_sac import SACPolicyForPointFlowEnv
+from solutions.policies_RecurrentPPO import RecurrentPPOPolicyForPointFlowEnv
 # from stable_baselines3 import TD3
-from stable_baselines3 import SAC
+from sb3_contrib import RecurrentPPO
 from stable_baselines3.common.callbacks import (CallbackList,
                                                 CheckpointCallback,
                                                 EvalCallback)
@@ -25,19 +25,14 @@ from stable_baselines3.common.vec_env import SubprocVecEnv
 from utils.common import get_time
 from wandb.integration.sb3 import WandbCallback
 
-from stable_baselines3 import HerReplayBuffer
-from stable_baselines3.her.goal_selection_strategy import GoalSelectionStrategy
-goal_selection_strategy = "future"
-
 import wandb
-from arguments import *
+from arguments_RecurrentPPO import *
 
 algorithm_aliases = {
-    "SAC": SAC,
+    "RecurrentPPO": RecurrentPPO,
 }
-
-SAC.policy_aliases["SACPolicyForPointFlowEnv"] = SACPolicyForPointFlowEnv
-# SAC.policy_aliases["TD3PolicyForLongOpenLockPointFlowEnv"] = TD3PolicyForLongOpenLockPointFlowEnv
+RecurrentPPO.policy_aliases["RecurrentPPOPolicyForPointFlowEnv"] = RecurrentPPOPolicyForPointFlowEnv
+# TQC.policy_aliases["TQCPolicyForLongOpenLockPointFlowEnv"] = TD3PolicyForLongOpenLockPointFlowEnv
 
 def make_env(env_name, seed=0, i=0, **env_args):
     num_devices = torch.cuda.device_count()
@@ -52,11 +47,10 @@ def make_env(env_name, seed=0, i=0, **env_args):
 
     return _init
 
-
 if __name__ == "__main__":
     parser = get_parser()
     args = parser.parse_args()
-    args.cfg='configs/parameters/peg_insertion_sac.yaml'
+    args.cfg='configs/parameters/peg_insertion_RecurrentPPO.yaml'
     with open(args.cfg, "r") as f:
         cfg = yaml.YAML(typ='safe', pure=True).load(f)
 
@@ -127,12 +121,6 @@ if __name__ == "__main__":
     model = algorithm_class(
         policy_name,
         env,
-        replay_buffer_class=HerReplayBuffer,
-        # Parameters for HER
-        replay_buffer_kwargs=dict(
-            n_sampled_goal=4,
-            goal_selection_strategy=goal_selection_strategy,
-        ),
         verbose=1,
         **cfg["policy"],
     )
@@ -158,12 +146,12 @@ if __name__ == "__main__":
         n_eval_episodes=cfg["train"]["n_eval"],
     )
 
-    WANDB = True
+    WANDB = False
     if WANDB:
         wandb_run = wandb.init(
             project=cfg["train"]["wandb_name"],
             name=f"{cfg['train']['name']}_{exp_start_time}",
-            entity="seu_robotic",
+            entity="openlock",
             config=cfg,
             sync_tensorboard=True,
             monitor_gym=False,

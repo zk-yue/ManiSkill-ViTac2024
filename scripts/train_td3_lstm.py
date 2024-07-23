@@ -14,9 +14,9 @@ from path import Path
 # from solutions.policies import (
 #     TD3PolicyForPointFlowEnv, TD3PolicyForLongOpenLockPointFlowEnv
 # )
-from solutions.policies_sac import SACPolicyForPointFlowEnv
-# from stable_baselines3 import TD3
-from stable_baselines3 import SAC
+from solutions.policies_td3_lstm import TD3PolicyForPointFlowEnv
+from stable_baselines3 import TD3
+# from sb3_contrib import TQC
 from stable_baselines3.common.callbacks import (CallbackList,
                                                 CheckpointCallback,
                                                 EvalCallback)
@@ -25,19 +25,16 @@ from stable_baselines3.common.vec_env import SubprocVecEnv
 from utils.common import get_time
 from wandb.integration.sb3 import WandbCallback
 
-from stable_baselines3 import HerReplayBuffer
-from stable_baselines3.her.goal_selection_strategy import GoalSelectionStrategy
-goal_selection_strategy = "future"
-
 import wandb
 from arguments import *
 
 algorithm_aliases = {
-    "SAC": SAC,
+    "TD3": TD3,
 }
+TD3.policy_aliases["TD3PolicyForPointFlowEnv"] = TD3PolicyForPointFlowEnv
+# TQC.policy_aliases["TQCPolicyForLongOpenLockPointFlowEnv"] = TD3PolicyForLongOpenLockPointFlowEnv
 
-SAC.policy_aliases["SACPolicyForPointFlowEnv"] = SACPolicyForPointFlowEnv
-# SAC.policy_aliases["TD3PolicyForLongOpenLockPointFlowEnv"] = TD3PolicyForLongOpenLockPointFlowEnv
+
 
 def make_env(env_name, seed=0, i=0, **env_args):
     num_devices = torch.cuda.device_count()
@@ -56,7 +53,7 @@ def make_env(env_name, seed=0, i=0, **env_args):
 if __name__ == "__main__":
     parser = get_parser()
     args = parser.parse_args()
-    args.cfg='configs/parameters/peg_insertion_sac.yaml'
+    args.cfg='configs/parameters/peg_insertion_td3.yaml'
     with open(args.cfg, "r") as f:
         cfg = yaml.YAML(typ='safe', pure=True).load(f)
 
@@ -127,12 +124,6 @@ if __name__ == "__main__":
     model = algorithm_class(
         policy_name,
         env,
-        replay_buffer_class=HerReplayBuffer,
-        # Parameters for HER
-        replay_buffer_kwargs=dict(
-            n_sampled_goal=4,
-            goal_selection_strategy=goal_selection_strategy,
-        ),
         verbose=1,
         **cfg["policy"],
     )
